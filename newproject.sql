@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Waktu pembuatan: 30 Jul 2021 pada 09.06
--- Versi server: 5.7.33
--- Versi PHP: 5.6.40
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 01 Agu 2021 pada 07.29
+-- Versi server: 10.4.13-MariaDB
+-- Versi PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,13 +24,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `budgetings`
+--
+
+CREATE TABLE `budgetings` (
+  `id_budget` int(11) NOT NULL,
+  `jenis_laporan` int(2) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `act_stok` int(11) NOT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `status` int(2) NOT NULL DEFAULT 0,
+  `user_id` int(10) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `budgetings`
+--
+
+INSERT INTO `budgetings` (`id_budget`, `jenis_laporan`, `id_product`, `id_category`, `qty`, `act_stok`, `remark`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 10001, 10, 11, 22, NULL, 1, 0, '2021-07-30 15:41:06', '2021-07-30 15:41:06'),
+(2, 1, 10001, 10, 11, 22, NULL, 1, 0, '2021-07-30 15:44:21', '2021-07-30 15:44:21'),
+(3, 1, 10002, 10, 11, 0, NULL, 0, 0, '2021-07-30 15:53:11', '2021-07-30 15:53:11'),
+(4, 1, 10017, 10, 11, 0, 'tidak', 0, 0, '2021-07-30 15:53:30', '2021-07-30 15:53:30');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `categories`
 --
 
 CREATE TABLE `categories` (
   `id_category` int(3) NOT NULL,
   `kategori` varchar(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -56,7 +85,7 @@ INSERT INTO `categories` (`id_category`, `kategori`, `created_at`, `updated_at`)
 CREATE TABLE `customers` (
   `id_customer` int(3) NOT NULL,
   `nama_konsumen` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -117,7 +146,7 @@ CREATE TABLE `products` (
   `kemasan` varchar(50) DEFAULT '',
   `uom` varchar(50) NOT NULL DEFAULT '',
   `stok` int(10) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -126,7 +155,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id_product`, `nama_barang`, `id_category`, `kemasan`, `uom`, `stok`, `created_at`, `updated_at`) VALUES
-(10001, 'Telur Ayam', 10, '', 'Kg', 10, '2021-07-05 08:26:20', '2021-07-28 13:26:23'),
+(10001, 'Telur Ayam', 10, '', 'Kg', 22, '2021-07-05 08:26:20', '2021-07-28 13:26:23'),
 (10002, 'Butter Elle', 10, '', 'Pack', 0, '2021-07-05 08:26:20', '2021-07-08 02:48:22'),
 (10003, ' Daun Basil ', 10, '', 'Gr', 0, '2021-07-05 08:26:20', NULL),
 (10004, ' Bawang Putih', 10, '', 'Kg', 0, '2021-07-05 08:26:20', NULL),
@@ -453,8 +482,8 @@ CREATE TABLE `purchases` (
   `id_product` int(11) NOT NULL,
   `id_category` int(3) NOT NULL,
   `qty` int(4) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -463,7 +492,9 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id_purchase`, `id_product`, `id_category`, `qty`, `status`, `date`, `updated_at`) VALUES
-(4, 10001, 10, 1, 1, '2021-07-29 09:01:59', NULL);
+(4, 10001, 10, 1, 1, '2021-07-29 09:01:59', NULL),
+(5, 10001, 10, 1, 1, '2021-07-30 17:33:31', NULL),
+(6, 10001, 10, 11, 1, '2021-07-30 17:34:36', NULL);
 
 --
 -- Trigger `purchases`
@@ -486,24 +517,6 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `reports`
---
-
-CREATE TABLE `reports` (
-  `id_laporan` int(11) NOT NULL,
-  `jenis_laporan` int(2) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `act_stok` int(11) NOT NULL,
-  `remark` varchar(255) NOT NULL,
-  `user_id` int(10) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `requisitions`
 --
 
@@ -515,7 +528,7 @@ CREATE TABLE `requisitions` (
   `jumlah` int(10) DEFAULT NULL,
   `status` int(2) NOT NULL,
   `date` datetime DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -529,9 +542,9 @@ CREATE TABLE `sells` (
   `id_product` int(11) NOT NULL,
   `id_category` int(3) NOT NULL,
   `qty` int(4) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `status` tinyint(4) DEFAULT 0,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -555,8 +568,8 @@ INSERT INTO `sells` (`id_sell`, `id_product`, `id_category`, `qty`, `status`, `d
 (17, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
 (18, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
 (19, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
-(20, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
-(21, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
+(20, 10022, 10, 9, 1, '2021-07-07 10:32:17', '2021-07-30 12:02:06'),
+(21, 10022, 10, 9, 1, '2021-07-07 10:32:17', '2021-07-30 12:02:02'),
 (22, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
 (23, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
 (24, 10022, 10, 9, 1, '2021-07-06 10:32:17', '2021-07-06 03:32:27'),
@@ -592,7 +605,7 @@ DELIMITER ;
 CREATE TABLE `suppliers` (
   `id_supplier` int(3) NOT NULL,
   `nama_supplier` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -637,6 +650,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `jabatan`, `remember_tok
 --
 
 --
+-- Indeks untuk tabel `budgetings`
+--
+ALTER TABLE `budgetings`
+  ADD PRIMARY KEY (`id_budget`);
+
+--
 -- Indeks untuk tabel `categories`
 --
 ALTER TABLE `categories`
@@ -677,12 +696,6 @@ ALTER TABLE `purchases`
   ADD KEY `id_category` (`id_category`);
 
 --
--- Indeks untuk tabel `reports`
---
-ALTER TABLE `reports`
-  ADD PRIMARY KEY (`id_laporan`);
-
---
 -- Indeks untuk tabel `requisitions`
 --
 ALTER TABLE `requisitions`
@@ -717,6 +730,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `budgetings`
+--
+ALTER TABLE `budgetings`
+  MODIFY `id_budget` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
@@ -744,7 +763,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT untuk tabel `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `requisitions`
