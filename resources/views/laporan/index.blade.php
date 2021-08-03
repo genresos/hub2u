@@ -23,7 +23,7 @@
                                 <input class="form-control" type="text" name="no_permintaan" value="0000" >
                                 </br>
                                 <div class="form-group">
-                                    <label>Vendor</label>
+                                    Vendor
                                     <select name="id_category" class="form-control" id="id_category">
                                     <option value="" selected hidden>-- Pilih Brand --</option>
                                     <option value="10">Amai</option>
@@ -35,9 +35,10 @@
                                     </select>
                                 </div>
                                 </br>
-                                </br>
+                             
                                 Tanggal : &ensp;
                                 <input type="date" name="actual_date" value="<?php echo date('Y-m-d'); ?>" />
+</br></br>
                                 <center><button class="btn btn-primary" name="submit" type="submit">Cetak Laporan</button></center>
                             </form>
                     </div>

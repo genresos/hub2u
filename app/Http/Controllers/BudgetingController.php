@@ -22,7 +22,7 @@ class BudgetingController extends Controller
         ->select('budgetings.*', 'products.*','categories.*')
         ->where('status','=', '0')
         ->get();
-        return view('budgeting/index', ['budgetings'=>$budgetings]);
+        return view('maintance', ['budgetings'=>$budgetings]);
     }
 
     public function store(Request $request){

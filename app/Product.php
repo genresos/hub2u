@@ -14,6 +14,7 @@ class Product extends Model
         'id_category',
         'uom',
         'stok',
+        'std_order'
         ];
 	protected $guarded  = ['created_at', 'updated_at']; 
     protected function serializeDate(DateTimeInterface $date)

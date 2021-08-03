@@ -52,6 +52,10 @@
                                 <label>Stok</label>
                                 <input class="form-control" type="text" name="stok" value="{{ $product->stok }}">
                             </div>
+                            <div class="form-group">
+                                <label>Std Order</label>
+                                <input class="form-control" type="text" name="std_order" value="{{ $product->std_order }}">
+                            </div>
                             <center>
                             <div class="form-group">
                                 <input class="btn btn-primary" type="submit" name="submit" value="Simpan">

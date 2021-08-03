@@ -82,7 +82,8 @@ class ProductController extends Controller
 			'nama_barang' => request('nama_barang'),
 			'id_category' => request('id_category'),
 			'uom' => request('uom'),
-			'stok'        => request('stok')
+			'stok'        => request('stok'),
+			'std_order'        => request('std_order'),
 		]);
 
 		return redirect('products')->with('Data berhasil ditambahkan');
@@ -94,7 +95,7 @@ class ProductController extends Controller
 
         if($product)
         {
-            $product->update($request->only('nama_barang', 'uom', 'stok'));
+            $product->update($request->only('nama_barang', 'uom', 'stok', 'std_order'));
 
 			return redirect('products')->with('Data berhasil ditambahkan');
         }

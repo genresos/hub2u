@@ -29,6 +29,7 @@
                                     <th> Nama Barang </th>
                                     <th> Vendor </th>
                                     <th> Satuan </th>
+                                    <th> Std Order </th>
                                     <th> Stok </th>
                                     <th></th>
                                     <th></th>
@@ -45,6 +46,7 @@
                                         <td>{{ $barang->nama_barang }}</td>
                                         <td>{{ $barang->kategori }}</td>
                                         <td>{{ $barang->uom }}</td>
+                                        <td>{{ $barang->std_order }}</td>
                                         <td>{{ $barang->stok }}</td>
                                         <td>
                                             <a href="{{ route('product-edit', $barang ->id_product) }}" class="btn btn-block btn-info btn-xs">Edit</a>

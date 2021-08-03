@@ -17,17 +17,13 @@
                     <div class="card-body">
                         <div class="form-group row-center">
                         <form action="/products" method="post">
-                            <!-- <div class="form-group">
-                                <label>SKU</label>
-                                <input class="form-control" type="text" name="id_product">
-                            </div> -->
                             <div class="form-group">
                                 <label>Nama Barang</label>
-                                <input class="form-control" type="text" name="nama_barang">
+                                <input class="form-control" type="text" name="nama_barang" required>
                             </div>
                             <div class="form-group">
                                 <label>Kategori Barang</label>
-                                <select name="id_category" class="form-control" id="id_category">
+                                <select name="id_category" class="form-control" id="id_category" required>
                                 <option value="10">Amai</option>
                                 <option value="20">Bube</option>
                                 <option value="30">Chirou</option>
@@ -38,19 +34,15 @@
                             </div>
                             <div class="form-group">
                                 <label>UoM</label>
-                                <input class="form-control" type="text" name="uom">
+                                <input class="form-control" type="text" name="uom" required>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>Harga Beli (Rp.)</label>
-                                <input class="form-control" class="uang" type="text" name="harga_beli">
-                            </div>
-                            <div class="form-group">
-                                <label>Harga Jual</label>
-                                <input class="form-control" type="text" name="harga_jual">
-                            </div> -->
                             <div class="form-group">
                                 <label>Stok</label>
                                 <input class="form-control" type="text" name="stok">
+                            </div>
+                            <div class="form-group">
+                                <label>Std Order</label>
+                                <input class="form-control" type="text" name="std_order">
                             </div>
                             <center>
                             <div class="form-group">
